@@ -1,0 +1,13 @@
+      {
+        "name": "TTS test",
+        "version": "1.0",
+        "manifest_version": 2,
+        "permissions": ["tts"],
+        "app": 
+        	{
+        	  "background": {
+        	  	"scripts": ["background.js"]
+         	  }
+         	}
+       }
+  
