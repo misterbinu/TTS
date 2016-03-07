@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	</head>
+	
+	<script>
+	
+	function synthesize() {
+		var lang = document.getElementById("language").elements;
+		var gen = document.getElementById("gender").elements;
+		var text = document.getElementById("text_input").elements;
+		
+		var langValue;
+		var genValue;
+		
+		for(i = 0; i < lang.length; i++) {
+			if(lang[i].cheched == true)
+				langValue = lang[i].name;
+			else
+				lang[i].checked = false;
+		}
+		
+		for(i = 0; i < gen.length; i++ {
+			if(gen[i].checked == true)
+				genValue = gen[i].name;
+			else
+				gen[i].checked = false;
+		}
+		
+		var parameters = new Object();
+		parameters.lang = langValue;
+		parameters.gender = genValue;
+		
+		chrome.tts.speak(text["tts_text"].value, parameters);
+	}
+	
+	</script>
+
+	<body>
+		<p>
+		<h2>Chromen TTS -rajapinnan testausta.</h2>
+		</p>
+		
+		<p id="napit">
+		
+		Valitse puhujan kieli: <br>
+		
+		<form id="language">
+			<input type="radio" name="fi" checked> Suomi<br>
+			<input type="radio" name="en-US"> Amerikan englanti<br>
+			<input type="radio" name="en-GB"> Brittienglanti<br>
+		</form> <br>
+		
+		Valitse puhujan sukupuoli: 
+		
+		<form id="gender"> <br>
+			<input type="radio" name="male" checked> Mies<br>
+			<input type="radio" name="female"> Nainen<br>
+		</form> <br>
+		
+		Kirjoita teksti tähän: <br>
+		
+		<form id="text_input"> <br>
+			<input type="text" name="tts_text">
+			<input type="button" name="text_submit" value="Lähetä" onclick="synthesize()"> <br>
+		</form>
+		
+		</p>
+	</body>
+</html>
