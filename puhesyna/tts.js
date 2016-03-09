@@ -18,5 +18,9 @@ function speak {
     
     ptcInput = Number(0.017 * ptc[0].value + 0.1);
     
+    textInput = String(text[0].value);
+    
     var options = { "lang" : langInput, "gender" : genInput, "pitch" : ptcInput };
+    
+    chrome.tts.speak(textInput, options);
 }
