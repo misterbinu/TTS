@@ -10,5 +10,6 @@ Current features:
 
 Coming:
 
+- better looking interface
 - different text I/O options (remote client)
 - support for all chrome.tts features
