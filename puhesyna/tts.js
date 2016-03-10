@@ -1,26 +1,57 @@
-function speak {
-    var lang = document.getElementById("language").elements;
-    var gen = document.getElementById("gender").elements;
-    var ptc = document.getElementById("pitch").elements;
-    var text = document.getElementById("tts_text").elements;
-    
-    var langInput, genInput, ptcInput, textInput;
-    
-    for(i = 0; i < lang.length; i++) {
-        if(lang[i].checked == true)
-            langInput = String(lang[i].value);
-    }
-    
-    for(i = 0; i < gen.length; i++) {
-        if(gen[i].checked == true)
-            genInput = String(gen[i].value);
-    }
-    
-    ptcInput = Number(0.017 * ptc[0].value + 0.1);
-    
-    textInput = String(text[0].value);
-    
-    var options = { "lang" : langInput, "gender" : genInput, "pitch" : ptcInput };
-    
-    chrome.tts.speak(textInput, options);
+var vcs = document.getElementById("voices");
+vcs.multiple = false;
+
+var voiceList = [];
+
+
+chrome.tts.getVoices(function(voice_array) {
+	for(var i = 0; i < voice_array.length; i++) {
+		var option = document.createElement("option");
+		
+		option.text = String(voice_array[i].lang + " " + voice_array[i].gender);
+		option.value = i;
+	
+		vcs.add(option);
+		
+		var voice = { "lang" : String(voice_array[i].lang) , "gender" : voice_array[i].gender };
+		
+		voiceList.push(voice);
+	}
+});
+
+
+var text = document.getElementById("text_input").elements;
+
+function speak() {
+	var ptc = document.getElementById("pitch");
+	var langInput, genInput, ptcInput, textInput;
+	
+	langInput = String(voiceList[vcs.selectedIndex].lang);
+	genInput = String(voiceList[vcs.selectedIndex].gender);
+	
+	ptcInput = Number(ptc["pit"].value * 0.017 + 0.1);
+
+	textInput = text[0].value;
+
+	var options = { "lang" : langInput, "gender" : genInput, "pitch" : ptcInput };
+	
+	chrome.tts.speak(textInput, options);
 }
+
+
+function stop() {
+	chrome.tts.stop();
+}
+
+
+function clear_text() {
+	text[0].value = " ";
+}
+
+
+var _text = document.getElementById("text_input").elements;
+
+_text[1].addEventListener("click", function() { speak(); }, false);
+_text[2].addEventListener("click", function() { stop(); }, false);
+_text[3].addEventListener("click", function() { clear_text(); }, false);
+
