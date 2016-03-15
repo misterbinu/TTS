@@ -24,16 +24,18 @@ var text = document.getElementById("text_input").elements;
 
 function speak() {
 	var ptc = document.getElementById("pitch");
-	var langInput, genInput, ptcInput, textInput;
+	var rte = document.getElementById("rate");
+	var langInput, genInput, ptcInput, rateInput, textInput;
 	
 	langInput = String(voiceList[vcs.selectedIndex].lang);
 	genInput = String(voiceList[vcs.selectedIndex].gender);
 	
 	ptcInput = Number(ptc["pit"].value * 0.017 + 0.1);
+	rateInput = Number(rte["rte"].value * 0.019 + 0.1);
 
 	textInput = text[0].value;
 
-	var options = { "lang" : langInput, "gender" : genInput, "pitch" : ptcInput };
+	var options = { "lang" : langInput, "gender" : genInput, "pitch" : ptcInput, "rate" : rateInput };
 	
 	chrome.tts.speak(textInput, options);
 }
@@ -54,4 +56,3 @@ var _text = document.getElementById("text_input").elements;
 _text[1].addEventListener("click", function() { speak(); }, false);
 _text[2].addEventListener("click", function() { stop(); }, false);
 _text[3].addEventListener("click", function() { clear_text(); }, false);
-
