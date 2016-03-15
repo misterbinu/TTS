@@ -28,6 +28,13 @@ body {
 	font-size:	15px;
 }
 
+#r_style {
+	margin:		15px;
+	margin-bottom:	30px;
+	font-family: 	"Arial", Times, serif;
+	font-size:	15px;
+}
+
 #ptcbar_style {
 	
 	margin-left:	10px;
@@ -39,4 +46,5 @@ body {
 	font-family: 	"Arial", Times, serif;
 	font-size:	15px;
 }
+
 
