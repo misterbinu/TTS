@@ -6,7 +6,7 @@ Current features:
 
 - text input via keyboard
 - supports all voices available within chrome.tts
-- pitch change slider
+- pitch & rate change sliders
 
 Coming:
 
